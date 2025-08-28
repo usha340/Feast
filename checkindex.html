@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image with Search and Info Boxes</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Status Bar */
+        .menu-bar {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        /* Menu Icon */
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        /* Feast Text */
+        .feast-text {
+            font-size: 25px;
+            font-weight: normal;
+            color: white;
+        }
+
+        /* Background Image */
+        .bg-image {
+            background-image: url('images/image.jpg'); /* Update the path as needed */
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .text {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .search-form {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-form input {
+            width: 300px;
+            padding: 15px;
+            border: 2px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+
+        .search-form button {
+            padding: 15px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .deliver-now {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: orange;
+            color: #fff;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Section for three images and three boxes */
+        .image-box-section {
+            padding: 50px;
+            background-color: #fff;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .image-row img {
+            width: 400px;
+            height: 30%;
+            border-radius: 10px;
+        }
+
+        .box-row {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .info-box {
+            width: 25%;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .info-box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .info-box p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .info-box a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .info-box a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Side Menu -->
+    <div class="sidebar">
+        <div class="sidebar-item"><a href="home.html">Home</a></div>
+        <div class="sidebar-item"><a href="indexlogin.html">Login</a></div>
+        <div class="sidebar-item"><a href="signup.html">Signup</a></div>
+        <div class="sidebar-item"><a href="queries.html">Queries</a></div>
+        <div class="sidebar-item"><a href="about.html">About Us</a></div>
+        <div class="sidebar-item"><a href="contacts.html">Contacts</a></div>
+    </div>
+
+    <!-- Menu and Feast Text Bar -->
+    <div class="menu-bar">
+        <div class="menu-icon">&#9776;</div>
+        <div class="feast-text">Feast</div>
+    </div>
+
+    <!-- Background Image Section -->
+    <div class="bg-image">
+        <!-- Welcome Text -->
+        <div class="text">Order Delivery Near You</div>
+
+        <!-- Search Form -->
+        <form class="search-form">
+            <input type="text" placeholder="Enter delivery address">
+            <button type="submit">Search here</button>
+        </form>
+
+        <!-- Deliver Now Button -->
+        <button class="deliver-now">Deliver now</button>
+    </div>
+
+    <!-- Image and Info Boxes Section -->
+    <section class="image-box-section">
+        <!-- Image Row -->
+        <div class="image-row">
+            <img src="images/image2.webp" alt="Add Restaurant">
+            <img src="images/Screenshot 2024-09-15 211859.png" alt="Feed Employees">
+            <img src="images/Screenshot 2024-09-15 221826.png" alt="Schedule Nutrition Diet">
+        </div>
+
+        <!-- Info Boxes Row -->
+        <div class="box-row">
+            <div class="info-box">
+                <h3>Add Restaurant</h3>
+                <p>Partner with us to grow your business by delivering food to a broader audience.</p>
+                <a href="#">Learn More</a>
+            </div>
+
+            <div class="info-box">
+                <h3>Feed Employees</h3>
+                <p>Get meals delivered directly to your office and keep your employees satisfied.</p>
+                <a href="#">Learn More</a>
+            </div>
+
+            <div class="info-box">
+                <h3>Schedule Nutrition Diet</h3>
+                <p>Personalized nutrition and meal plans to suit your health needs.</p>
+                <a href="#">Learn More</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

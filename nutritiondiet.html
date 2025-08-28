@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nutrition Diet Scheduler</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #f7ff00, #db36a4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .diet-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff007f;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    select, input[type="text"], input[type="email"], input[type="time"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #ff007f;
+      border: none;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #d9006e;
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      color: green;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="diet-container">
+    <h2>Schedule Your Daily Diet</h2>
+    <form id="dietForm">
+      <label for="goal">Choose Your Goal:</label>
+      <select id="goal" required>
+        <option value="">-- Select --</option>
+        <option value="weight_loss">Weight Loss</option>
+        <option value="muscle_gain">Muscle Gain</option>
+        <option value="keto">Keto</option>
+        <option value="vegan">Vegan</option>
+        <option value="balanced">Balanced Diet</option>
+      </select>
+
+      <label for="time">Preferred Time:</label>
+      <input type="time" id="time" required>
+
+      <label for="contact">Email or Phone Number:</label>
+      <input type="text" id="contact" required placeholder="example@mail.com or +1234567890" />
+
+      <button type="submit">Schedule Diet Plan</button>
+      <p class="success-message" id="success">Diet Plan Scheduled! You’ll receive it daily.</p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('dietForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('success').style.display = 'block';
+      form.reset();
+    });
+  </script>
+</body>
+</html>

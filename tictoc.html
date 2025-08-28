@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tic-Tac-Toe Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fefefe;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin: auto;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #ddd;
+      font-size: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .cell.X {
+      color: #ff3860;
+    }
+
+    .cell.O {
+      color: #23d160;
+    }
+
+    .cell:hover {
+      background-color: #ccc;
+    }
+
+    #winningMessage {
+      margin-top: 20px;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      margin-top: 10px;
+      background-color: #3273dc;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #2759a4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tic-Tac-Toe</h1>
+  <div id="gameBoard" class="board">
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+  </div>
+  <h2 id="winningMessage" class="hide">
+    <span id="winnerText"></span>
+    <br>
+    <button id="restartButton">Restart</button>
+  </h2>
+
+  <script>
+    const cells = document.querySelectorAll('[data-cell]');
+    const board = document.getElementById('gameBoard');
+    const winningMessage = document.getElementById('winningMessage');
+    const winnerText = document.getElementById('winnerText');
+    const restartButton = document.getElementById('restartButton');
+
+    const WIN_COMBINATIONS = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+      [0, 4, 8], [2, 4, 6]             // Diagonals
+    ];
+
+    let isCircleTurn;
+
+    startGame();
+
+    restartButton.addEventListener('click', startGame);
+
+    function startGame() {
+      isCircleTurn = false;
+      cells.forEach(cell => {
+        cell.classList.remove('X', 'O');
+        cell.textContent = ''; // Clear text
+        cell.removeEventListener('click', handleClick);
+        cell.addEventListener('click', handleClick, { once: true });
+      });
+      setBoardHoverClass();
+      winningMessage.classList.add('hide');
+    }
+
+    function handleClick(e) {
+      const cell = e.target;
+      const currentClass = isCircleTurn ? 'O' : 'X';
+      cell.classList.add(currentClass);
+      cell.textContent = currentClass; // Display the "X" or "O"
+
+      if (checkWin(currentClass)) {
+        endGame(false);
+      } else if (isDraw()) {
+        endGame(true);
+      } else {
+        isCircleTurn = !isCircleTurn;
+        setBoardHoverClass();
+      }
+    }
+
+    function endGame(draw) {
+      if (draw) {
+        winnerText.innerText = "It's a Draw!";
+      } else {
+        winnerText.innerText = `${isCircleTurn ? "O" : "X"} Wins!`;
+      }
+      winningMessage.classList.remove('hide');
+    }
+
+    function isDraw() {
+      return [...cells].every(cell =>
+        cell.classList.contains('X') || cell.classList.contains('O')
+      );
+    }
+
+    function checkWin(currentClass) {
+      return WIN_COMBINATIONS.some(combination =>
+        combination.every(index =>
+          cells[index].classList.contains(currentClass)
+        )
+      );
+    }
+
+    function setBoardHoverClass() {
+      board.classList.remove('X', 'O');
+      board.classList.add(isCircleTurn ? 'O' : 'X');
+    }
+  </script>
+</body>
+</html>

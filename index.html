@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feast - Food Delivery</title>
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ===== Top Menu Bar ===== */
+    .menu-bar {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-icon {
+      font-size: 30px;
+      margin-right: 10px;
+    }
+
+    .feast-text {
+      font-size: 25px;
+      font-weight: normal;
+      color: white;
+    }
+
+    /* ===== Side Pop Menu ===== */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      transition: right 0.3s ease;
+      z-index: 2000;
+    }
+
+    .side-menu h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* ===== Background Image ===== */
+    .bg-image {
+      background-image: url('images/image.jpg');
+      height: 100vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .text {
+      color: white;
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .search-form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .search-form input {
+      width: 300px;
+      padding: 15px;
+      border: 2px solid #ccc;
+      border-radius: 5px 0 0 5px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-form button {
+      padding: 15px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .deliver-now {
+      background-color: orange;
+      color: #fff;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .image-box-section {
+      padding: 50px 10%;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .image-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .image-row img {
+      width: 30%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .box-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .info-box {
+      width: 30%;
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .info-box:hover {
+      transform: translateY(-10px);
+      background-color: #e0e0e0;
+    }
+
+    .info-box h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .info-box p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .info-box a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .info-box a:hover {
+      background-color: #555;
+    }
+
+    .section {
+      padding: 50px 10%;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto 20px;
+      color: #555;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 60%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-form button {
+      padding: 10px 20px;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    iframe {
+      width: 80%;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+.about-section {
+  background: linear-gradient(135deg, #f9f9f9, #fff6e5, #f0f0ff);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animation Classes */
+.animate-fadein {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s forwards;
+}
+
+.animate-fadein.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.animate-fadein.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.animate-fadein.delay-3 {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+    @media (max-width: 768px) {
+      .image-row,
+      .box-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .info-box,
+      .image-row img,
+      .contact-form input,
+      .contact-form textarea {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="indexsidepop.html" class="menu-bar">
+    <div class="menu-icon">&#9776;</div>
+    <div class="feast-text">Feast</div>
+  </a>
+ 
+
+  <!-- === Background Section === -->
+  <div class="bg-image">
+    <div class="text">Order Delivery Near You</div>
+    <form class="search-form">
+      <input type="text" placeholder="Enter delivery address" />
+      <button type="submit">Search here</button>
+    </form>
+    <button class="deliver-now">Deliver now</button>
+  </div>
+
+  <!-- === Image Boxes Section === -->
+  <section class="image-box-section">
+    <div class="image-row">
+      <img src="images/image2.png" alt="Add Restaurant" />
+      <img src="images/Screenshot2024-09-15_211859.png" alt="Feed Employees" />
+      <img src="images/Screenshot2024-09-15_221826.png" alt="Schedule Nutrition Diet" />
+    </div>
+
+    <div class="box-row">
+      <div class="info-box">
+        <h3>Add Restaurant</h3>
+        <p>Partner with us to grow your business by delivering food to a broader audience.</p>
+        <a href="addreslogin.html">Learn More</a>
+      </div>
+
+      <div class="info-box">
+        <h3>Feed Employees</h3>
+        <p>Get meals delivered directly to your office and keep your employees satisfied.</p>
+        <a href="businesssignup.html">Learn More</a>
+      </div>
+
+      <div class="info-box">
+        <h3>Schedule Nutrition Diet</h3>
+        <p>Personalized nutrition and meal plans to suit your health needs.</p>
+        <a href="nutritiondiet.html">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- === About Section === -->
+ <!-- === About Section === -->
+<section class="section about-section">
+  <h2 class="animate-fadein">Why Choose Feast?</h2>
+  <p class="animate-fadein delay-1">
+    At <strong>Feast</strong>, we're not just delivering food—we're delivering **flavor, freshness, and future-forward convenience** right to your doorstep. Whether you're craving your favorite dish or discovering something new, Feast is your go-to food companion.
+  </p>
+  <p class="animate-fadein delay-2">
+    Partnering with top-rated restaurants, using smart logistics, and driven by a passion for **delighting customers**—we bring meals to life, one delivery at a time.
+  </p>
+  <p class="animate-fadein delay-3">
+    Hungry? Don't wait. **Join the Feast revolution!**
+  </p>
+</section>
+
+  <!-- === Contact Section === -->
+  <section class="section">
+    <h2>Contact Us</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <iframe src="https://www.google.com/maps/embed?..."></iframe>
+  </section>
+
+  <!-- === JS Script === -->
+  <script>
+    const openMenuBtn = document.getElementById('openMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+
+    openMenuBtn.addEventListener('click', function () {
+      sideMenu.style.right = '0';
+    });
+
+    closeMenuBtn.addEventListener('click', function () {
+      sideMenu.style.right = '-300px';
+    });
+  </script>
+
+</body>
+
+</html>
